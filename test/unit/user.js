@@ -21,8 +21,8 @@ describe('User', function(){
 
   beforeEach(function(done){
     cp.execFile(__dirname + '/../scripts/clean_db.sh', [db], {cwd:__dirname + '/../scripts'}, function(err, stdout, stderr){
-      console.log('stdout' ,stdout);
-      console.log('stderr', stderr);
+      //console.log('stdout' ,stdout);
+      //console.log('stderr', stderr);
       done();
     });
   });
