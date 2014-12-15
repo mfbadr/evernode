@@ -21,8 +21,8 @@ describe('User', function(){
 
   beforeEach(function(done){
     cp.execFile(__dirname + '/../scripts/clean_db.sh', [db], {cwd:__dirname + '/../scripts'}, function(err, stdout, stderr){
-      //console.log('stdout' ,stdout);
-      //console.log('stderr', stderr);
+      console.log('stdout' ,stdout);
+      console.log('stderr', stderr);
       done();
     });
   });
@@ -38,7 +38,10 @@ describe('User', function(){
   describe('.register', function(){
     it('should register a new user', function(done){
       User.register({username:'joe', password:'bob', avatar:'http://png-1.findicons.com/files/icons/1072/face_avatars/300/i04.png'}, function(err){
-        expect(err).to.be.null;
+        if(err){
+          console.log('register err: ', err);
+        }
+        expect(err).to.not.be.ok;
         done();
       });
     });
