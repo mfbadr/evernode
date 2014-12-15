@@ -14,6 +14,7 @@ module.exports = {
   payload:{
     maxBytes: 4194304, // 2^22 ; 4MB
     output:'stream',
+    timeout: 60000,
     parse: true
   },
   handler: function(request, reply){
