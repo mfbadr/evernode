@@ -8,8 +8,8 @@ var expect       = require('chai').expect,
     Lab          = require('lab'),
     lab          = exports.lab = Lab.script(),
     describe     = lab.describe,
-    helpers       = require('../helpers/helpers'),
-    db            = helpers.getDb(),
+    helpers      = require('../helpers/helpers'),
+    db           = helpers.getDb(),
     //before       = lab.before,
     beforeEach   = lab.beforeEach,
     it           = lab.it;
@@ -30,6 +30,18 @@ describe('Note', function(){
       var note = new Note();
       expect(note).to.be.instanceof(Note);
       done();
+    });
+  });
+  describe('.create', function(){
+    it('should create a new note and save to db', function(done){
+      var u = {id: 1},
+          n = {title: 'here is a note', body: 'note body', tags: 'a,b,c'};
+      Note.create(u, n, function(err, note){
+        expect(err).to.not.be.ok;
+        expect(note).to.be.ok;
+        done();
+      });
+
     });
   });
 
