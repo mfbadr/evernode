@@ -36,12 +36,21 @@ describe('Note', function(){
     it('should create a new note and save to db', function(done){
       var u = {id: 1},
           n = {title: 'here is a note', body: 'note body', tags: 'a,b,c'};
-      Note.create(u, n, function(err, note){
+      Note.create(u, n, function(err, noteId){
         expect(err).to.not.be.ok;
-        expect(note).to.be.ok;
+        expect(noteId).to.be.ok;
         done();
       });
-
+    });
+  });
+  describe('.count', function(){
+    it('should count the notes belonging to a certain user', function(done){
+      var u = {id: 1};
+      Note.count(u, function(err, count){
+        expect(err).to.not.be.ok;
+        expect(count).to.equal('1');
+        done();
+      });
     });
   });
 
