@@ -91,5 +91,21 @@ describe('Users', function(){
       });
     });
   });
+  describe('get /status', function(){
+    it('should return a user', function(done){
+      var options = {
+        method: 'get',
+        url: '/status',
+        headers:{
+          cookie:cookie
+        }
+      };
+      server.inject(options, function(response){
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.username).to.equal('bob');
+        done();
+      });
+    });
+  });
 
 });
