@@ -17,15 +17,30 @@ var expect       = require('chai').expect,
 
 
 describe('Users', function(){
+  var cookie;
   //before(function(done){
   //});
+
   beforeEach(function(done){
     cp.execFile(__dirname + '/../scripts/clean_db.sh', [db], {cwd:__dirname + '/../scripts'}, function(err, stdout, stderr){
       //console.log('stdout' ,stdout);
       //console.log('stderr', stderr);
-      done();
+
+      var options = {
+        method: 'post',
+        url: '/login',
+        payload: {
+          username: 'bob',
+          password: 'bob'
+        }
+      };
+      server.inject(options, function(response){
+        cookie = response.headers['set-cookie'][0].match(/hapi-cookie=[^;]+/)[0];
+        done();
+      });
     });
   });
+
   describe('post /register', function(){
     it('should register a new user', function(done){
       var options = {
@@ -55,8 +70,26 @@ describe('Users', function(){
       };
       server.inject(options, function(response){
         expect(response.statusCode).to.equal(200);
+        expect(response.result.username).to.equal('bob');
         done();
       });
     });
   });
+
+  describe('delete /logout', function(){
+    it('should logout a user', function(done){
+      var options = {
+        method: 'delete',
+        url: '/logout',
+        headers:{
+          cookie:cookie
+        }
+      };
+      server.inject(options, function(response){
+        expect(response.statusCode).to.equal(200);
+        done();
+      });
+    });
+  });
+
 });
