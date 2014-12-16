@@ -8,6 +8,7 @@ var expect       = require('chai').expect,
     Lab          = require('lab'),
     lab          = exports.lab = Lab.script(),
     describe     = lab.describe,
+    fs           = require('fs'),
     helpers      = require('../helpers/helpers'),
     db           = helpers.getDb(),
     //before       = lab.before,
@@ -49,6 +50,32 @@ describe('Note', function(){
       Note.count(u, function(err, count){
         expect(err).to.not.be.ok;
         expect(count).to.equal('1');
+        done();
+      });
+    });
+  });
+  describe('.query', function(){
+    it('should return notes matching a query', function(done){
+      Note.query({id: 1}, {}, function(err, notes){
+        console.log('list notes', notes);
+        expect(err).to.not.be.ok;
+        done();
+      });
+    });
+  });
+  describe('.uploadmobile', function(){
+    it('should upload a b64 encoded image', function(done){
+      var u = {id: 1, token: 'token'};
+      Note.uploadmobile(u, 'base64', 1, function(err, results){
+        expect(err).to.be.null;
+        done();
+      });
+    });
+  });
+  describe('.upload', function(){
+    it('should upload an image', function(done){
+      var file = fs.createReadStream(__dirname + '/../fixtures/gear.svg');
+      Note.upload({token: 'token'}, file, 'gear.svg', 1, function(err, results){
         done();
       });
     });
