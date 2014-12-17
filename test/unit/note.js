@@ -57,7 +57,6 @@ describe('Note', function(){
   describe('.query', function(){
     it('should return notes matching a query', function(done){
       Note.query({id: 1}, {}, function(err, notes){
-        console.log('list notes', notes);
         expect(err).to.not.be.ok;
         done();
       });
