@@ -16,13 +16,17 @@ describe('login', function(){
     expect(element(by.css('div[ui-view] > h1')).getText()).toEqual('login');
   });
 
-  /*
-  it('should register a new user', function(){
-    element(by.model('user.username')).sendKeys('sam' + h.random(5000));
-    element(by.model('user.password')).sendKeys('456');
-    element(by.model('user.avatar')).sendKeys('http://png-1.findicons.com/files/icons/1072/face_avatars/300/i04.png');
+  it('should login an existing user', function(){
+    element(by.model('user.username')).sendKeys('bob');
+    element(by.model('user.password')).sendKeys('bob');
+    element(by.css('button[ng-click="submit()"]')).click();
+    expect(element(by.css('div[ui-view] > h1')).getText()).toEqual('home');
+  });
+
+  it('should not login an bad user', function(){
+    element(by.model('user.username')).sendKeys('bob');
+    element(by.model('user.password')).sendKeys('joe');
     element(by.css('button[ng-click="submit()"]')).click();
     expect(element(by.css('div[ui-view] > h1')).getText()).toEqual('login');
   });
-  */
 });
