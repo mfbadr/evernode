@@ -51,6 +51,7 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "coveralls": "^2.11.2",
-    "lab": "^5.1.0"
+    "lab": "^5.1.0",
+    "protractor": "^1.5.0"
   }
 }
