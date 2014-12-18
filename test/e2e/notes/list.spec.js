@@ -28,9 +28,11 @@ describe('notes list', function(){
     expect(element.all(by.repeater('note in notes')).count()).toBeGreaterThan(0);
   });
 
-  // it('should go to note detail', function(){
-  //   element(by.repeater('note in notes').row(0)).element()
-  // });
+  it('should go to note detail', function(){
+    create('x', 'y', 'z1,z2,z3');
+    element(by.repeater('note in notes').row(0)).element(by.css('td:nth-child(2) > a')).click();
+    expect(element(by.css('div[ui-view] > h1')).getText()).toEqual('x');
+  });
 
 });
 
