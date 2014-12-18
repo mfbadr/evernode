@@ -16,6 +16,7 @@
     "start": "node server/index.js",
     "syntax": "grunt build",
     "test": "make test",
+    "e2e": "make test-e2e",
     "coveralls": "make test-cov | coveralls",
     "postinstall": "grunt deploy"
   },
